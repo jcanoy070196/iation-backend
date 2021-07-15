@@ -20,7 +20,8 @@ class CarBasicResource extends JsonResource
             "color_id" => $this->color->id,
             "model" => $this->model->name,
             "manufacturer" => $this->model->manufacturer->name,
-            "color" => $this->color->name
+            "color" => $this->color->name,
+            "name" => $this->name
         ];
     }
 }

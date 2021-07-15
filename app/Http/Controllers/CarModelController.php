@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Model\CreateCarModelRequest;
 use App\Http\Requests\Model\UpdateCarModelRequest;
+use App\Http\Resources\CarModelBasicResource;
 use App\Http\Resources\CarModelResource;
 use App\Models\CarModel;
 use App\Models\Manufacturer;
@@ -18,7 +19,7 @@ class CarModelController extends Controller
         try{
             $carModels = CarModel::all();
 
-            return $this->success('CarModels Retrieved', ['car_models' => CarModelResource::collection($carModels)]); 
+            return $this->success('CarModels Retrieved', ['car_models' => CarModelBasicResource::collection($carModels)]); 
         }catch(\Exception $e){
             return $this->error($e->getMessage(), $request->all());
         }

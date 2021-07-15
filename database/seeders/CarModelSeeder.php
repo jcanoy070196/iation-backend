@@ -22,7 +22,7 @@ class CarModelSeeder extends Seeder
             for ($i = 1; $i <= 5; $i++) { 
                 CarModel::create([
                     'manufacturer_id' => $manufacturer->id,
-                    'name' => "Model $i"
+                    'name' => "$manufacturer->name  Model $i"
                 ]);
             }
         }
