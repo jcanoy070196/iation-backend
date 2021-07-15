@@ -14,6 +14,11 @@ class CarModelResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            "id" => $this->id,
+            "manufacturer_id" => $this->manufacturer->id,
+            "manufacturer" => new ManufacturerResource($this->manufacturer),
+            "name" => $this->name,
+        ];
     }
 }
