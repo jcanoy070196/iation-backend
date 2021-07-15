@@ -24,7 +24,9 @@ class UpdateCarModelRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id' => 'numeric | required',
+            'name' => 'string | required',
+            'manufacturer_id' => 'numeric | required'
         ];
     }
 }

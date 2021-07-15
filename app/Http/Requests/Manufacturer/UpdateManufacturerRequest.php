@@ -24,7 +24,8 @@ class UpdateManufacturerRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id' => 'numeric | required',
+            'name' => 'string | required'
         ];
     }
 }
