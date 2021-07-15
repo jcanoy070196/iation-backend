@@ -10,6 +10,7 @@ use App\Models\Car;
 use App\Models\CarModel;
 use App\Models\Color;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CarController extends Controller
 {
@@ -29,11 +30,9 @@ class CarController extends Controller
     {
         try{
             $car = Car::find($id);
-
             if(!$car) return $this->error('Car not found!', ['id' => $id]); 
 
             return $this->success('Car Retrieved', ['car' => new CarResource($car)]);
-            
         }catch(\Exception $e){
             return $this->error($e->getMessage(), $request->all());
         }
@@ -45,11 +44,9 @@ class CarController extends Controller
             DB::beginTransaction();
 
             $carModel = CarModel::find($request->car_model_id);
-
             if(!$carModel) return $this->error('Car Model not found!', $request->all()); 
 
             $color = Color::find($request->color_id);
-
             if(!$color) return $this->error('Color not found!', $request->all()); 
 
             $car = Car::create([
@@ -74,15 +71,12 @@ class CarController extends Controller
             DB::beginTransaction();
 
             $car = Car::find($request->id);
-
             if(!$car) return $this->error('Car not found!', $request->all());
 
             $carModel = CarModel::find($request->car_model_id);
-
             if(!$carModel) return $this->error('Car Model not found!', $request->all()); 
 
             $color = Color::find($request->color_id);
-
             if(!$color) return $this->error('Color not found!', $request->all()); 
             
             $car->name = $request->name;
@@ -92,7 +86,6 @@ class CarController extends Controller
             DB::commit();
 
             return $this->success('Car Updated', ['car' => new CarResource($car)]);
-
         }catch(\Exception $e){
             DB::rollBack();
             return $this->error($e->getMessage(), $request->all());
@@ -103,8 +96,8 @@ class CarController extends Controller
     {
         try{
             DB::beginTransaction();
-            $car = Car::find($request->id);
 
+            $car = Car::find($request->id);
             if(!$car) return $this->error('Car not found!', $request->all());
 
             $car->delete();
@@ -112,7 +105,6 @@ class CarController extends Controller
             DB::commit();
 
             return $this->success('Car Deleted', []);
-
         }catch(\Exception $e){
             return $this->error($e->getMessage(), $request->all());
         }
